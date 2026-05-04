@@ -2785,65 +2785,175 @@
     </section>
 
     <!-- ============ CLAIM / FORM ============ -->
-    <section class="section section--cta" id="claim">
-      <div class="container container--narrow">
-        <h2 class="section__h section__h--center">
-          Run 2,000 records free.<br/>
-          <span class="accent" style="font-family: &quot;Instrument Serif&quot;; font-weight: 400; font-size: 60px">See the numbers yourself.</span>
-        </h2>
-        <p class="section__lead section__lead--center">
-          No credit card. No subscription. 48-hour delivery. If our connection rate doesn&rsquo;t beat your current source, walk away. You&rsquo;ve lost nothing.
-        </p>
+    <section id="claim">
+      <style>
+        #claim {
+          padding: 80px 20px;
+          background: #0a0a0a;
+          direction: rtl;
+          text-align: center;
+        }
+        .claim-headline {
+          font-family: 'Cairo', sans-serif;
+          font-size: clamp(1.6rem, 5vw, 2.4rem);
+          font-weight: 900;
+          color: #fff;
+          margin-bottom: 8px;
+        }
+        .claim-sub {
+          font-family: 'Cairo', sans-serif;
+          font-size: 1rem;
+          color: rgba(255,255,255,0.5);
+          margin-bottom: 36px;
+        }
+        .claim-form-wrap {
+          max-width: 480px;
+          margin: 0 auto;
+          background: #111;
+          border: 1px solid rgba(255,106,0,0.25);
+          border-radius: 20px;
+          padding: 36px 28px;
+          box-shadow: 0 0 40px rgba(255,69,0,0.08);
+        }
+        .cf-group {
+          margin-bottom: 20px;
+          text-align: right;
+        }
+        .cf-label {
+          font-family: 'Cairo', sans-serif;
+          font-size: 0.9rem;
+          font-weight: 700;
+          color: rgba(255,255,255,0.8);
+          display: block;
+          margin-bottom: 8px;
+        }
+        .cf-input {
+          width: 100%;
+          background: #1a1a1a;
+          border: 1px solid rgba(255,255,255,0.12);
+          border-radius: 10px;
+          padding: 13px 16px;
+          font-family: 'Cairo', sans-serif;
+          font-size: 1rem;
+          color: #fff;
+          outline: none;
+          transition: border-color 0.2s ease, box-shadow 0.2s ease;
+          direction: rtl;
+        }
+        .cf-input::placeholder { color: rgba(255,255,255,0.25); }
+        .cf-input:focus {
+          border-color: rgba(255,106,0,0.6);
+          box-shadow: 0 0 0 3px rgba(255,106,0,0.1);
+        }
+        .cf-submit {
+          width: 100%;
+          font-family: 'Cairo', sans-serif;
+          background: linear-gradient(135deg, #ff4500, #ff6a00);
+          color: #fff;
+          border: none;
+          border-radius: 10px;
+          padding: 14px 24px;
+          font-size: 1.1rem;
+          font-weight: 700;
+          cursor: pointer;
+          box-shadow: 0 0 20px rgba(255,69,0,0.35);
+          transition: filter 0.2s ease, transform 0.2s ease;
+          margin-top: 8px;
+        }
+        .cf-submit:hover { filter: brightness(1.12); transform: scale(1.01); }
+        .cf-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .cf-note {
+          font-family: 'Cairo', sans-serif;
+          font-size: 0.78rem;
+          color: rgba(255,255,255,0.3);
+          margin-top: 14px;
+          text-align: center;
+        }
+        .cf-error {
+          font-family: 'Cairo', sans-serif;
+          font-size: 0.85rem;
+          color: #f87171;
+          margin-top: 6px;
+          display: none;
+        }
+      </style>
 
-        <form class="form" id="claimForm" novalidate>
-          <div class="form__row">
-            <label class="form__label" for="name">Full name</label>
-            <input class="form__input" type="text" id="name" name="name" required />
-          </div>
-          <div class="form__row">
-            <label class="form__label" for="email">Work email</label>
-            <input class="form__input" type="email" id="email" name="email" required />
-          </div>
-          <div class="form__row">
-            <label class="form__label" for="agency">Agency name</label>
-            <input class="form__input" type="text" id="agency" name="agency" required />
-          </div>
-          <div class="form__row">
-            <label class="form__label" for="vertical">Vertical</label>
-            <select class="form__input" id="vertical" name="vertical" required>
-              <option value="">Choose one</option>
-              <option value="solar">Solar</option>
-              <option value="real-estate">Real Estate (wholesalers / fix-and-flip)</option>
-              <option value="roofing">Roofing</option>
-              <option value="multi">Multi-vertical BPO</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div class="form__row">
-            <label class="form__label" for="volume">Estimated monthly volume</label>
-            <select class="form__input" id="volume" name="volume" required>
-              <option value="">Choose one</option>
-              <option value="lt10k">Under 10,000 records</option>
-              <option value="10k-50k">10,000 &ndash; 50,000</option>
-              <option value="50k-200k">50,000 &ndash; 200,000</option>
-              <option value="gt200k">200,000+</option>
-            </select>
-          </div>
+      <!-- Hidden GHL iframe — keeps the lead in CRM -->
+      <iframe
+        src="https://api.leadconnectorhq.com/widget/form/kWaZrDRGaU7FqCL7g5Pd"
+        id="ghl-hidden-iframe"
+        data-form-id="kWaZrDRGaU7FqCL7g5Pd"
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-activation-type="alwaysActivated"
+        data-deactivation-type="neverDeactivate"
+        data-form-name="Waleed Hegazy"
+        style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px;"
+        tabindex="-1"
+        aria-hidden="true"
+      ></iframe>
+      <script src="https://link.msgsndr.com/js/form_embed.js"></script>
 
-          <button class="btn btn--primary btn--xl form__submit" type="submit" data-cta="form">
-            Claim My 2,000 Free Records →
-          </button>
-          <p class="form__legal">
-            We&rsquo;ll email you within 24 hours to schedule a 15-minute call and kick off your free trial.
-          </p>
+      <h2 class="claim-headline">سجل بياناتك دلوقتي</h2>
+      <p class="claim-sub">وهنتواصل معاك فوراً</p>
+
+      <div class="claim-form-wrap">
+        <form id="customClaimForm" novalidate>
+          <div class="cf-group">
+            <label class="cf-label" for="cf_name">اسمك بالكامل</label>
+            <input class="cf-input" type="text" id="cf_name" placeholder="اكتب اسمك هنا" autocomplete="name" />
+            <span class="cf-error" id="cf_name_err">من فضلك ادخل اسمك</span>
+          </div>
+          <div class="cf-group">
+            <label class="cf-label" for="cf_phone">رقم التليفون <span style="color:#ff6a00">*</span></label>
+            <input class="cf-input" type="tel" id="cf_phone" placeholder="01XXXXXXXXX" autocomplete="tel" />
+            <span class="cf-error" id="cf_phone_err">من فضلك ادخل رقم تليفونك</span>
+          </div>
+          <button class="cf-submit" type="submit" id="cf_btn">اشترك الآن</button>
+          <p class="cf-note">بعد التسجيل هتتحول لصفحة الدفع فوراً</p>
         </form>
+      </div>
 
-        <div class="form-success" id="formSuccess" hidden>
-          <h3 class="form-success__h">You&rsquo;re in. Check your email.</h3>
-          <p>We&rsquo;ll be in touch within 24 hours to schedule your 15-minute discovery call and start your 2,000-record free trial.</p>
-          <p>Want to skip the wait?</p>
-          <a class="btn btn--primary btn--xl" id="bookNow" href="#" target="_blank" rel="noopener">Book a call now →</a>
-        </div>
+      <script>
+        (function () {
+          var form  = document.getElementById('customClaimForm');
+          var btn   = document.getElementById('cf_btn');
+          var ghlId = 'kWaZrDRGaU7FqCL7g5Pd';
+
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            var name  = document.getElementById('cf_name').value.trim();
+            var phone = document.getElementById('cf_phone').value.trim();
+            var valid = true;
+
+            document.getElementById('cf_name_err').style.display  = 'none';
+            document.getElementById('cf_phone_err').style.display = 'none';
+
+            if (!phone) {
+              document.getElementById('cf_phone_err').style.display = 'block';
+              valid = false;
+            }
+            if (!valid) return;
+
+            btn.disabled = true;
+            btn.textContent = 'جاري التسجيل...';
+
+            /* Send to GHL silently */
+            fetch('https://services.leadconnectorhq.com/forms/' + ghlId + '/submissions', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ full_name: name, phone: phone, formId: ghlId }),
+              mode: 'no-cors'
+            }).catch(function(){});
+
+            /* Redirect regardless — GHL receives it in the background */
+            setTimeout(function () {
+              window.location.href = 'payment.html';
+            }, 600);
+          });
+        }());
+      </script>
       </div>
     </section>
 
