@@ -1,6 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/fallihco/public_html/mr-waleed-hegazy
-    - /bin/mkdir -p $DEPLOYPATH
-    - /bin/cp -r . $DEPLOYPATH/
