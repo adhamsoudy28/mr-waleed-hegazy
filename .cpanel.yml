@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/$USER/public_html/mr-waleed-hegazy
+    - export DEPLOYPATH=/home/fallihco/public_html/mr-waleed-hegazy
     - /bin/cp -r index.html $DEPLOYPATH/
     - /bin/cp -r styles.css $DEPLOYPATH/
     - /bin/cp -r script.js $DEPLOYPATH/
