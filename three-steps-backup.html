@@ -1,0 +1,351 @@
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="section" id="how-it-works">
+      <div class="container">
+        <h2 class="section__h section__h--center">Three steps. Zero friction.</h2>
+
+        <!-- VARIANT A: Timeline (vertical, connected) -->
+        <ol class="hiw-timeline" id="hiwTimeline">
+          <li class="hiw-tl-item">
+            <div class="hiw-tl-node">
+              <div class="hiw-tl-ring"><span class="hiw-tl-num">1</span></div>
+              <div class="hiw-tl-connector"></div>
+            </div>
+            <div class="hiw-tl-body">
+              <span class="hiw-tl-tag">You send</span>
+              <h3 class="hiw-tl-h">Send your address list</h3>
+              <p class="hiw-tl-p">CSV, Excel, whatever you have. Property addresses in any US state.</p>
+            </div>
+          </li>
+          <li class="hiw-tl-item">
+            <div class="hiw-tl-node">
+              <div class="hiw-tl-ring hiw-tl-ring--mid"><span class="hiw-tl-num">2</span></div>
+              <div class="hiw-tl-connector"></div>
+            </div>
+            <div class="hiw-tl-body">
+              <span class="hiw-tl-tag hiw-tl-tag--mid">We work</span>
+              <h3 class="hiw-tl-h">We enrich it in 48 hours</h3>
+              <p class="hiw-tl-p">Verified owner names, phone numbers, and emails appended to every record.</p>
+              <div class="hiw-tl-badge">⚡ Usually same-day</div>
+            </div>
+          </li>
+          <li class="hiw-tl-item hiw-tl-item--last">
+            <div class="hiw-tl-node">
+              <div class="hiw-tl-ring hiw-tl-ring--end"><span class="hiw-tl-num">3</span></div>
+            </div>
+            <div class="hiw-tl-body">
+              <span class="hiw-tl-tag hiw-tl-tag--end">You call</span>
+              <h3 class="hiw-tl-h">Upload to your dialer</h3>
+              <p class="hiw-tl-p">Mojo, Batch Dialer, CallTools, whatever you run. Start calling the same day.</p>
+            </div>
+          </li>
+        </ol>
+
+        <!-- VARIANT B: Swipeable cards -->
+        <div class="hiw-swipe" id="hiwSwipe" style="display:none">
+          <div class="hiw-swipe__track">
+            <div class="hiw-swipe__card">
+              <div class="hiw-sc-num">01</div>
+              <div class="hiw-sc-icon">📋</div>
+              <h3 class="hiw-sc-h">Send your address list</h3>
+              <p class="hiw-sc-p">CSV, Excel, whatever you have. Property addresses in any US state.</p>
+              <div class="hiw-sc-dot-row"><span class="hiw-sc-dot hiw-sc-dot--on"></span><span class="hiw-sc-dot"></span><span class="hiw-sc-dot"></span></div>
+            </div>
+            <div class="hiw-swipe__card">
+              <div class="hiw-sc-num">02</div>
+              <div class="hiw-sc-icon">⚡</div>
+              <h3 class="hiw-sc-h">We enrich it in 48 hours</h3>
+              <p class="hiw-sc-p">Verified owner names, phone numbers, and emails appended to every record.</p>
+              <div class="hiw-sc-dot-row"><span class="hiw-sc-dot"></span><span class="hiw-sc-dot hiw-sc-dot--on"></span><span class="hiw-sc-dot"></span></div>
+            </div>
+            <div class="hiw-swipe__card">
+              <div class="hiw-sc-num">03</div>
+              <div class="hiw-sc-icon">📞</div>
+              <h3 class="hiw-sc-h">Upload to your dialer</h3>
+              <p class="hiw-sc-p">Mojo, Batch Dialer, CallTools, whatever you run. Start calling the same day.</p>
+              <div class="hiw-sc-dot-row"><span class="hiw-sc-dot"></span><span class="hiw-sc-dot"></span><span class="hiw-sc-dot hiw-sc-dot--on"></span></div>
+            </div>
+          </div>
+          <p class="hiw-swipe__hint">Swipe to continue →</p>
+        </div>
+
+        <!-- VARIANT C: Bold numbers -->
+        <div class="hiw-bold" id="hiwBold" style="display:none">
+          <div class="hiw-bold-step">
+            <div class="hiw-bold-bg">1</div>
+            <div class="hiw-bold-content">
+              <h3 class="hiw-bold-h">Send your address list</h3>
+              <p class="hiw-bold-p">CSV, Excel, whatever you have. Property addresses in any US state.</p>
+            </div>
+          </div>
+          <div class="hiw-bold-step">
+            <div class="hiw-bold-bg">2</div>
+            <div class="hiw-bold-content">
+              <h3 class="hiw-bold-h">We enrich it in 48 hours</h3>
+              <p class="hiw-bold-p">Verified owner names, phone numbers, and emails appended to every record.</p>
+              <span class="hiw-bold-pill">⚡ Usually same-day</span>
+            </div>
+          </div>
+          <div class="hiw-bold-step">
+            <div class="hiw-bold-bg">3</div>
+            <div class="hiw-bold-content">
+              <h3 class="hiw-bold-h">Upload to your dialer</h3>
+              <p class="hiw-bold-p">Mojo, Batch Dialer, CallTools, whatever you run. Start calling the same day.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <style>
+      /* ── Variant A: Timeline ── */
+      .hiw-timeline {
+        list-style: none;
+        margin-top: 48px;
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0;
+      }
+      .hiw-tl-item {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 0 20px;
+        margin-bottom: 0;
+      }
+      .hiw-tl-item--last .hiw-tl-body { padding-bottom: 0; }
+      .hiw-tl-node {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hiw-tl-ring {
+        width: 48px; height: 48px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(255,69,0,0.5);
+        background: rgba(255,69,0,0.10);
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 0 0 5px rgba(255,69,0,0.07), 0 0 20px rgba(255,69,0,0.20);
+        flex-shrink: 0;
+        position: relative;
+        z-index: 1;
+      }
+      .hiw-tl-ring--mid {
+        border-color: rgba(255,119,51,0.6);
+        background: rgba(255,119,51,0.12);
+        box-shadow: 0 0 0 5px rgba(255,119,51,0.08), 0 0 24px rgba(255,119,51,0.25);
+      }
+      .hiw-tl-ring--end {
+        border-color: rgba(246,194,90,0.6);
+        background: rgba(246,194,90,0.10);
+        box-shadow: 0 0 0 5px rgba(246,194,90,0.08), 0 0 20px rgba(246,194,90,0.20);
+      }
+      .hiw-tl-num {
+        font-size: 16px; font-weight: 800;
+        color: #FF7733;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-tl-ring--end .hiw-tl-num { color: #F6C25A; }
+      .hiw-tl-connector {
+        flex: 1;
+        width: 1.5px;
+        background: linear-gradient(180deg, rgba(255,69,0,0.35), rgba(255,119,51,0.15));
+        min-height: 32px;
+        margin: 4px 0;
+      }
+      .hiw-tl-body {
+        padding-bottom: 40px;
+        padding-top: 8px;
+      }
+      .hiw-tl-tag {
+        font-size: 10px; font-weight: 700;
+        letter-spacing: 0.12em; text-transform: uppercase;
+        color: rgba(255,119,51,0.7);
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+        display: block; margin-bottom: 6px;
+      }
+      .hiw-tl-tag--mid { color: rgba(255,119,51,0.9); }
+      .hiw-tl-tag--end { color: rgba(246,194,90,0.8); }
+      .hiw-tl-h {
+        font-size: 18px; font-weight: 700;
+        color: #fff; letter-spacing: -0.02em;
+        margin-bottom: 6px; line-height: 1.25;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-tl-p {
+        font-size: 14px; color: rgba(183,188,200,0.85);
+        line-height: 1.6;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-tl-badge {
+        display: inline-flex; align-items: center; gap: 5px;
+        margin-top: 10px;
+        background: rgba(255,119,51,0.08);
+        border: 1px solid rgba(255,119,51,0.22);
+        border-radius: 999px;
+        padding: 4px 12px;
+        font-size: 12px; font-weight: 600;
+        color: #FF7733;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+
+      /* ── Variant B: Swipeable Cards ── */
+      .hiw-swipe { margin-top: 48px; }
+      .hiw-swipe__track {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 4px 4px 16px;
+      }
+      .hiw-swipe__track::-webkit-scrollbar { display: none; }
+      .hiw-swipe__card {
+        scroll-snap-align: center;
+        flex: 0 0 min(300px, 80vw);
+        background: #0c0e18;
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 20px;
+        padding: 28px 24px 24px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .hiw-sc-num {
+        font-size: 80px; font-weight: 800;
+        letter-spacing: -0.05em;
+        line-height: 1;
+        position: absolute; top: -8px; right: 16px;
+        background: linear-gradient(180deg, rgba(255,69,0,0.18), rgba(255,69,0,0));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        pointer-events: none;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-sc-icon { font-size: 28px; }
+      .hiw-sc-h {
+        font-size: 18px; font-weight: 700;
+        color: #fff; letter-spacing: -0.02em;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-sc-p {
+        font-size: 13px; color: rgba(183,188,200,0.85);
+        line-height: 1.6; flex: 1;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-sc-dot-row {
+        display: flex; gap: 6px; margin-top: 8px;
+      }
+      .hiw-sc-dot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: rgba(255,255,255,0.12);
+      }
+      .hiw-sc-dot--on {
+        background: #FF4500;
+        box-shadow: 0 0 8px rgba(255,69,0,0.6);
+        width: 18px; border-radius: 3px;
+      }
+      .hiw-swipe__hint {
+        text-align: center;
+        font-size: 12px; color: rgba(255,255,255,0.28);
+        margin-top: 8px;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+
+      /* ── Variant C: Bold Numbers ── */
+      .hiw-bold {
+        margin-top: 48px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        max-width: 580px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hiw-bold-step {
+        position: relative;
+        background: #0c0e18;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 16px;
+        padding: 28px 28px 28px 80px;
+        overflow: hidden;
+        transition: border-color 0.2s ease;
+      }
+      .hiw-bold-step:hover { border-color: rgba(255,69,0,0.35); }
+      .hiw-bold-bg {
+        position: absolute;
+        left: -8px; top: 50%;
+        transform: translateY(-50%);
+        font-size: 100px; font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.05em;
+        background: linear-gradient(135deg, rgba(255,69,0,0.22), rgba(255,69,0,0.04));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        pointer-events: none;
+        user-select: none;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-bold-content { position: relative; z-index: 1; }
+      .hiw-bold-h {
+        font-size: 18px; font-weight: 700;
+        color: #fff; letter-spacing: -0.02em;
+        margin-bottom: 6px;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-bold-p {
+        font-size: 14px; color: rgba(183,188,200,0.85);
+        line-height: 1.6;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-bold-pill {
+        display: inline-flex; align-items: center; gap: 5px;
+        margin-top: 10px;
+        background: rgba(255,119,51,0.08);
+        border: 1px solid rgba(255,119,51,0.22);
+        border-radius: 999px;
+        padding: 4px 12px;
+        font-size: 12px; font-weight: 600;
+        color: #FF7733;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+    </style>
+
+
+
+    <script>
+      (function () {
+        var variants = {
+          timeline: { el: 'hiwTimeline', desc: 'Vertical narrative timeline — great storytelling flow on mobile.' },
+          swipe:    { el: 'hiwSwipe',    desc: 'Swipeable cards — one step at a time, scroll-snap on mobile.' },
+          bold:     { el: 'hiwBold',     desc: 'Bold stacked numbers — dramatic, minimal, high contrast.' },
+        };
+        var panel = document.getElementById('unified-tweaks');
+        var desc = document.getElementById('ut-hiw-desc');
+        var closeBtn = document.getElementById('ut-close');
+        var current = 'timeline';
+
+        function show(variant) {
+          Object.keys(variants).forEach(function(k) {
+            document.getElementById(variants[k].el).style.display = (k === variant) ? '' : 'none';
+          });
+          document.querySelectorAll('.tw-seg-btn').forEach(function(btn) {
+            btn.classList.toggle('is-active', btn.dataset.variant === variant);
+          });
+          desc.textContent = variants[variant].desc;
+          current = variant;
+          window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { hiwVariant: variant } }, '*');
+        }
+
+        document.querySelectorAll('.tw-seg-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() { show(btn.dataset.variant); });
+        });
+
+      }());
+    </script>
+
