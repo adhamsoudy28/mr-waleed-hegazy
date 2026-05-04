@@ -2,11 +2,5 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/fallihco/public_html/mr-waleed-hegazy
-    - /bin/cp -r index.html $DEPLOYPATH/
-    - /bin/cp -r styles.css $DEPLOYPATH/
-    - /bin/cp -r script.js $DEPLOYPATH/
-    - /bin/cp -r logo.jpg $DEPLOYPATH/
-    - /bin/cp -r "Fallih Logo.png" $DEPLOYPATH/
-    - /bin/cp -r "Day 1.png" $DEPLOYPATH/
-    - /bin/cp -r Day2.png $DEPLOYPATH/
-    - /bin/cp -r assets $DEPLOYPATH/
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp -r . $DEPLOYPATH/
