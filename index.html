@@ -2576,6 +2576,214 @@
       }
     </style>
 
+    <!-- ============ WHAT YOU GET ============ -->
+    <section id="what-you-get">
+      <style>
+        #what-you-get {
+          padding: 80px 20px;
+          background: #0a0a0a;
+          direction: rtl;
+          text-align: center;
+        }
+        .wyg-headline {
+          font-family: 'Cairo', sans-serif;
+          font-size: clamp(1.6rem, 5vw, 2.4rem);
+          font-weight: 900;
+          color: #fff;
+          margin-bottom: 40px;
+          letter-spacing: -0.01em;
+        }
+        .wyg-headline span {
+          color: #ff6a00;
+          text-decoration: underline;
+          text-decoration-color: rgba(255,106,0,0.4);
+          text-underline-offset: 6px;
+        }
+        .wyg-cards {
+          max-width: 680px;
+          margin: 0 auto 36px;
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+        .wyg-card {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          background: #111;
+          border: 1px solid rgba(255,106,0,0.2);
+          border-radius: 14px;
+          padding: 20px 24px;
+          text-align: right;
+          transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .wyg-card:hover {
+          border-color: rgba(255,106,0,0.5);
+          box-shadow: 0 0 20px rgba(255,106,0,0.08);
+        }
+        .wyg-card-body { flex: 1; }
+        .wyg-card-name {
+          font-family: 'Cairo', sans-serif;
+          font-size: 1rem;
+          font-weight: 800;
+          color: #fff;
+          margin-bottom: 4px;
+        }
+        .wyg-card-desc {
+          font-family: 'Cairo', sans-serif;
+          font-size: 0.85rem;
+          color: rgba(255,255,255,0.5);
+          line-height: 1.5;
+        }
+        .wyg-card-price { display: none; }
+        /* Summary */
+        .wyg-summary {
+          max-width: 680px;
+          margin: 0 auto 32px;
+          background: #111;
+          border: 1px solid rgba(255,106,0,0.25);
+          border-radius: 14px;
+          padding: 24px;
+          text-align: center;
+          font-family: 'Cairo', sans-serif;
+        }
+        .wyg-total {
+          font-size: 1rem;
+          color: rgba(255,255,255,0.5);
+          margin-bottom: 6px;
+        }
+        .wyg-total span {
+          color: #ff6a00;
+          font-weight: 700;
+          text-decoration: line-through;
+        }
+        .wyg-natural {
+          font-size: 1rem;
+          color: rgba(255,255,255,0.5);
+          margin-bottom: 12px;
+        }
+        .wyg-natural span {
+          color: rgba(255,255,255,0.7);
+          font-weight: 700;
+          text-decoration: line-through;
+        }
+        .wyg-now {
+          font-size: clamp(1.6rem, 5vw, 2.2rem);
+          font-weight: 900;
+          color: #ff6a00;
+          margin-bottom: 6px;
+        }
+        .wyg-scarcity {
+          font-size: 0.82rem;
+          color: rgba(255,255,255,0.4);
+          margin-bottom: 20px;
+        }
+        .wyg-cta {
+          display: inline-block;
+          font-family: 'Cairo', sans-serif;
+          background: linear-gradient(135deg, #ff4500, #ff6a00);
+          color: #fff;
+          padding: 14px 48px;
+          border-radius: 10px;
+          font-weight: 700;
+          font-size: 1.1rem;
+          text-decoration: none;
+          box-shadow: 0 0 24px rgba(255,69,0,0.4);
+          transition: filter 0.2s ease, transform 0.2s ease;
+          width: 100%;
+          max-width: 400px;
+        }
+        .wyg-cta:hover {
+          filter: brightness(1.15);
+          transform: scale(1.02);
+        }
+        .wyg-cta small {
+          display: block;
+          font-size: 0.75rem;
+          font-weight: 400;
+          opacity: 0.75;
+          margin-top: 3px;
+        }
+      </style>
+
+      <h2 class="wyg-headline">كل ما ستحصل عليه <span>عند الاشتراك</span></h2>
+
+      <div class="wyg-cards">
+        <div class="wyg-card">
+          <div class="wyg-card-body">
+            <p class="wyg-card-name">📚 الكورس الأساسي — 7 محاضرات كاملة</p>
+            <p class="wyg-card-desc">تغطية شاملة لكل مواضيع الاستاتيكا في المنهج — من الصفر للاحتراف</p>
+          </div>
+          <div class="wyg-card-price">
+            <span class="label">القيمة</span>
+            <span class="amount">1500 جنية</span>
+          </div>
+        </div>
+
+        <div class="wyg-card">
+          <div class="wyg-card-body">
+            <p class="wyg-card-name">البونص #1: ملخصات وملازم جاهزة</p>
+            <p class="wyg-card-desc">ملخصات مرتبة لكل محاضرة تقدر تذاكر منها مباشرة قبل الامتحان</p>
+          </div>
+          <div class="wyg-card-price">
+            <span class="label">القيمة</span>
+            <span class="amount">500 جنية</span>
+          </div>
+        </div>
+
+        <div class="wyg-card">
+          <div class="wyg-card-body">
+            <p class="wyg-card-name">البونص #2: أسئلة متوقعة للامتحان</p>
+            <p class="wyg-card-desc">أسئلة مختارة بعناية من أكتر المواضيع اللي بتيجي في الامتحان</p>
+          </div>
+          <div class="wyg-card-price">
+            <span class="label">القيمة</span>
+            <span class="amount">500 جنية</span>
+          </div>
+        </div>
+
+        <div class="wyg-card">
+          <div class="wyg-card-body">
+            <p class="wyg-card-name">البونص #3: جروب خاص للمشتركين</p>
+            <p class="wyg-card-desc">مجتمع خاص فيه زملاء ودعم مستمر من الدكتور وليد حجازي</p>
+          </div>
+          <div class="wyg-card-price">
+            <span class="label">القيمة</span>
+            <span class="amount">500 جنية</span>
+          </div>
+        </div>
+
+        <div class="wyg-card">
+          <div class="wyg-card-body">
+            <p class="wyg-card-name">البونص #4: متابعة طول اليوم معاك</p>
+            <p class="wyg-card-desc">مش هتلاقي سؤال من غير رد — فريق متابعة على مدار اليوم</p>
+          </div>
+          <div class="wyg-card-price">
+            <span class="label">القيمة</span>
+            <span class="amount">500 جنية</span>
+          </div>
+        </div>
+
+        <div class="wyg-card">
+          <div class="wyg-card-body">
+            <p class="wyg-card-name">البونص #5: وصول مدى الحياة للمحاضرات</p>
+            <p class="wyg-card-desc">المحاضرات بتفضل معاك — ذاكر وقت ما تحب وبالسرعة اللي تناسبك</p>
+          </div>
+          <div class="wyg-card-price">
+            <span class="label">القيمة</span>
+            <span class="amount">500 جنية</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="wyg-summary">
+        <p class="wyg-now">400 جنية فقط</p>
+        <a href="payment.html" class="wyg-cta">اشترك الآن</a>
+      </div>
+    </section>
+
     <!-- ============ CLAIM / FORM ============ -->
     <section class="section section--cta" id="claim">
       <div class="container container--narrow">
@@ -2639,8 +2847,8 @@
       </div>
     </section>
 
-    <!-- ============ PRICING ============ -->
-    <section class="section section--dark" id="pricing">
+    <!-- ============ PRICING (hidden) ============ -->
+    <section class="section section--dark" id="pricing" hidden>
       <div class="container container--narrow">
         <h2 class="section__h section__h--center">Volume pricing. No contracts.</h2>
         <p class="section__lead section__lead--center">
