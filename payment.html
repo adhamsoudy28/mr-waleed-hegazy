@@ -146,6 +146,11 @@
       font-weight: 600;
       opacity: 0.85;
     }
+    .pay-btn-logo {
+      height: 28px;
+      width: auto;
+      object-fit: contain;
+    }
     .pay-btn--instapay {
       background: #111;
       color: #fff;
@@ -337,7 +342,7 @@
 
     <!-- Steps -->
     <div class="pay-steps">
-      <p class="pay-steps-title">📋 خطوات الاشتراك — بسيطة وسريعة</p>
+      <p class="pay-steps-title">خطوات الاشتراك — بسيطة وسريعة</p>
       <div class="pay-step">
         <div class="pay-step-num">1</div>
         <div class="pay-step-body">
@@ -378,10 +383,12 @@
     <!-- Payment Methods -->
     <div class="pay-methods">
       <a href="#" class="pay-btn pay-btn--instapay">
-        ⚡ دفع عبر InstaPay
+        <img src="instapay-logo.png" alt="InstaPay" class="pay-btn-logo" />
+        دفع عبر InstaPay
       </a>
       <a href="tel:01124949674" class="pay-btn pay-btn--vodafone">
-        📱 دفع عبر فودافون كاش
+        <img src="vodafone-cash-logo.png" alt="Vodafone Cash" class="pay-btn-logo" />
+        دفع عبر فودافون كاش
         <small>01124949674</small>
       </a>
       <a href="https://wa.me/201124949674" target="_blank" rel="noopener" class="pay-btn pay-btn--whatsapp">
