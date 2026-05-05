@@ -3060,18 +3060,16 @@
             btn.disabled = true;
             btn.textContent = 'جاري التسجيل...';
 
-            /* Send to GHL via internal form submit endpoint */
-            var fd = new FormData();
-            fd.append('formData', JSON.stringify({
-              full_name: name,
-              phone: formattedPhone,
-              formId: ghlId,
-              locationId: 'ZIWBCqESmX7syIsIakSz'
-            }));
-
-            fetch('https://backend.leadconnectorhq.com/forms/submit', {
+            /* Send to GHL via Cloudflare Worker proxy */
+            fetch('https://ghl-proxy.adhamsoudy03.workers.dev', {
               method: 'POST',
-              body: fd
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                full_name: name,
+                phone: formattedPhone,
+                locationId: 'ZIWBCqESmX7syIsIakSz',
+                tags: ['waleed-hegazy']
+              })
             })
             .then(function(res) {
               console.log('[GHL] status:', res.status);
