@@ -3030,6 +3030,15 @@
           var btn   = document.getElementById('cf_btn');
           var ghlId = 'kWaZrDRGaU7FqCL7g5Pd';
 
+          function formatEgyptianPhone(raw) {
+            var digits = raw.replace(/\D/g, '');
+            /* 01XXXXXXXXX → +201XXXXXXXXX */
+            if (digits.startsWith('0')) digits = '2' + digits;
+            /* 201XXXXXXXXX → +201XXXXXXXXX */
+            if (!digits.startsWith('+')) digits = '+' + digits;
+            return digits;
+          }
+
           form.addEventListener('submit', function (e) {
             e.preventDefault();
 
@@ -3046,6 +3055,8 @@
             }
             if (!valid) return;
 
+            var formattedPhone = formatEgyptianPhone(phone);
+
             btn.disabled = true;
             btn.textContent = 'جاري التسجيل...';
 
@@ -3053,20 +3064,23 @@
             var fd = new FormData();
             fd.append('formData', JSON.stringify({
               full_name: name,
-              phone: phone,
+              phone: formattedPhone,
               formId: ghlId,
               locationId: 'ZIWBCqESmX7syIsIakSz'
             }));
+
             fetch('https://backend.leadconnectorhq.com/forms/submit', {
               method: 'POST',
-              body: fd,
-              mode: 'no-cors'
-            }).catch(function(){});
-
-            /* Redirect regardless — GHL receives it in the background */
-            setTimeout(function () {
+              body: fd
+            })
+            .then(function(res) {
+              console.log('[GHL] status:', res.status);
               window.location.href = 'payment.html';
-            }, 600);
+            })
+            .catch(function(err) {
+              console.warn('[GHL] fetch error:', err);
+              window.location.href = 'payment.html';
+            });
           });
         }());
       </script>
