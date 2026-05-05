@@ -380,6 +380,391 @@
       </div>
     </section>
 
+    <!-- ============ BRIDGE ============ -->
+    <section id="bridge-section">
+
+      <!-- Part 1: Evidence card -->
+      <h2 class="bv2-section-heading">المشكلة مش</h2>
+      <div class="bv2-card" id="bv2Card">
+        <div class="bv2-row bv2-row--rtl">
+          <div class="bv2-x"><span>✕</span></div>
+          <span class="bv2-phrase">إن الوقت مش كفاية.</span>
+        </div>
+        <div class="bv2-row bv2-row--rtl">
+          <div class="bv2-x"><span>✕</span></div>
+          <span class="bv2-phrase">إن الإحصاء صعب.</span>
+        </div>
+        <div class="bv2-row bv2-row--rtl" style="margin-bottom:0">
+          <div class="bv2-x"><span>✕</span></div>
+          <span class="bv2-phrase">إنك مش بتذاكر كفاية.</span>
+        </div>
+      </div>
+
+      <!-- Part 2: Divider -->
+      <div class="bv2-divider-wrap">
+        <div class="bv2-divider" id="bv2Divider"></div>
+      </div>
+
+      <!-- Part 3: Verdict -->
+      <div class="bv2-verdict">
+        <p class="bv2-line1" id="bv2Line1">الحقيقة إن المشكلة مش فيك...</p>
+        <p class="bv2-line2" id="bv2Line2">المشكلة إنك ماعندكش النظام الصح.</p>
+      </div>
+
+    </section>
+
+    <style>
+      #bridge-section {
+        padding: 80px 24px;
+        background: var(--bg);
+      }
+      .bv2-card {
+        max-width: 480px;
+        margin: 0 auto;
+        background: #0D0D1A;
+        border: 1px solid rgba(255,69,0, 0.3);
+        border-radius: 20px;
+        padding: 32px;
+        box-shadow: 0 0 40px rgba(255,69,0, 0.08);
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 500ms ease-out, transform 500ms ease-out;
+        direction: rtl;
+      }
+      .bv2-card.is-visible { opacity: 1; transform: translateY(0); }
+      .bv2-section-heading {
+        font-size: clamp(22px, 5vw, 30px);
+        font-weight: 700;
+        font-family: 'Cairo', sans-serif;
+        color: rgba(255, 255, 255, 0.85);
+        text-align: center;
+        direction: rtl;
+        margin: 0 auto 28px;
+        letter-spacing: 0;
+      }
+      .bv2-row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+      .bv2-row--rtl {
+        justify-content: flex-start;
+      }
+      .bv2-x {
+        width: 28px; height: 28px;
+        min-width: 28px;
+        border-radius: 50%;
+        background: #1A0A0A;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .bv2-x span {
+        color: #EF4444;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1;
+      }
+      .bv2-phrase {
+        font-size: 20px;
+        font-weight: 600;
+        color: #ffffff;
+        font-family: 'Cairo', sans-serif;
+        direction: rtl;
+        position: relative;
+        display: inline-block;
+      }
+      /* Animated strikethrough — RTL: starts from right */
+      .bv2-phrase::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 2px;
+        width: 0;
+        background: rgba(239, 68, 68, 0.7);
+        border-radius: 1px;
+        transition: width 500ms cubic-bezier(.4, 0, .2, 1);
+      }
+      /* Stagger each line after card is visible */
+      .bv2-card.is-visible .bv2-row:nth-child(1) .bv2-phrase::after {
+        width: 100%;
+        transition-delay: 400ms;
+      }
+      .bv2-card.is-visible .bv2-row:nth-child(2) .bv2-phrase::after {
+        width: 100%;
+        transition-delay: 900ms;
+      }
+      .bv2-card.is-visible .bv2-row:nth-child(3) .bv2-phrase::after {
+        width: 100%;
+        transition-delay: 1400ms;
+      }
+      .bv2-divider-wrap {
+        display: flex;
+        justify-content: center;
+        margin: 48px 0;
+      }
+      .bv2-divider {
+        width: 80px; height: 2px;
+        background: #FF4500;
+        border-radius: 2px;
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 400ms ease-out, box-shadow 600ms ease-in-out;
+      }
+      .bv2-divider.is-grown  { transform: scaleX(1); }
+      .bv2-divider.is-pulsed { box-shadow: 0 0 12px rgba(255,69,0, 0.8); }
+      .bv2-divider.is-done   { box-shadow: none; }
+      .bv2-verdict { text-align: center; direction: rtl; }
+      .bv2-line1 {
+        font-size: clamp(32px, 6vw, 52px);
+        font-weight: 800;
+        color: #ffffff;
+        line-height: 1.3;
+        letter-spacing: 0;
+        margin: 0;
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 500ms ease-out, transform 500ms ease-out;
+        font-family: 'Cairo', sans-serif;
+      }
+      .bv2-line1.is-visible { opacity: 1; transform: translateY(0); }
+      .bv2-line2 {
+        font-size: 20px;
+        font-weight: 500;
+        color: #FF4500;
+        margin: 12px 0 0 0;
+        opacity: 0;
+        transition: opacity 400ms ease-out;
+        font-family: 'Cairo', sans-serif;
+      }
+      .bv2-line2.is-visible { opacity: 1; }
+      @media (max-width: 768px) {
+        .bv2-card   { max-width: 100%; padding: 24px; }
+        .bv2-phrase { font-size: 18px; }
+        .bv2-line2  { font-size: 18px; }
+      }
+    </style>
+
+    <script>
+      (function () {
+        const section  = document.getElementById('bridge-section');
+        const card     = document.getElementById('bv2Card');
+        const divider  = document.getElementById('bv2Divider');
+        const line1    = document.getElementById('bv2Line1');
+        const line2    = document.getElementById('bv2Line2');
+
+        const obs = new IntersectionObserver(function(entries) {
+          if (!entries[0].isIntersecting) return;
+          obs.disconnect();
+
+          // Step 1 — card in at t=0
+          card.classList.add('is-visible');
+
+          // Step 2 — divider grows at t=300ms
+          setTimeout(function() {
+            divider.classList.add('is-grown');
+          }, 300);
+
+          // Step 3 — divider pulse at t=700ms (after 400ms grow)
+          setTimeout(function() {
+            divider.classList.add('is-pulsed');
+          }, 700);
+
+          // Step 4 — pulse fades at t=1300ms
+          setTimeout(function() {
+            divider.classList.remove('is-pulsed');
+            divider.classList.add('is-done');
+          }, 1300);
+
+          // Step 5 — line1 at t=500ms
+          setTimeout(function() {
+            line1.classList.add('is-visible');
+          }, 500);
+
+          // Step 6 — line2 at t=1000ms (500ms after line1)
+          setTimeout(function() {
+            line2.classList.add('is-visible');
+          }, 1000);
+        }, { threshold: 0.30 });
+
+        obs.observe(section);
+      })();
+    </script>
+
+    <!-- ── Section separator ── -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:8px 0 16px;position:relative;z-index:2;">
+      <div style="width:1px;height:32px;background:linear-gradient(to bottom,transparent,rgba(255,69,0,0.35));"></div>
+      <div style="width:72px;height:72px;border-radius:50%;border:1px solid rgba(255,69,0,0.40);background:rgba(255,69,0,0.08);box-shadow:0 0 0 5px rgba(255,69,0,0.06),0 0 18px rgba(255,69,0,0.18);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
+        <img src="Fallih Logo.png" alt="" style="width:56px;height:56px;object-fit:cover;border-radius:50%;opacity:0.85;" />
+      </div>
+      <div style="width:1px;height:24px;background:linear-gradient(to bottom,rgba(255,69,0,0.25),transparent);"></div>
+    </div>
+
+    <!-- ============ PROBLEM VS SOLUTION ============ -->
+    <section id="ps-section">
+      <div class="ps-inner">
+
+        <h2 class="ps-headline">الطالب اللي بيجيب 60...<br><span class="ps-hl">مش أذكى منك</span></h2>
+        <p class="ps-sub">الفرق الوحيد إنه عنده نظام — وإنت لسه بتدور عليه.</p>
+
+        <div class="ps-cards">
+
+          <!-- Problem card -->
+          <div class="ps-card ps-card--problem">
+            <span class="ps-badge ps-badge--problem">المشكلة</span>
+            <div class="ps-card-visual ps-card-visual--problem">😰</div>
+            <div class="ps-card-body-wrap">
+              <h3 class="ps-card-title">بتحفظ القوانين... وفي الامتحان بتنسى كل حاجة</h3>
+              <p class="ps-card-text">بتفتح الكتاب، بتحفظ، بتعمل ملخصات — وبعدين يجي سؤال مختلف شوية وتحس إنك ماشفتوش قبل كده. مش لأنك مذاكرتش، لأن محدش علمك تشوف المنهج كوحدة واحدة مترابطة.</p>
+            </div>
+          </div>
+
+          <!-- Arrow -->
+          <div class="ps-arrow" aria-hidden="true">↓</div>
+
+          <!-- Solution card -->
+          <div class="ps-card ps-card--solution">
+            <span class="ps-badge ps-badge--solution">الحل</span>
+            <div class="ps-card-visual ps-card-visual--solution">🎯</div>
+            <div class="ps-card-body-wrap">
+              <h3 class="ps-card-title">لما تشوف المنهج كخريطة، كل سؤال بيبقى منطقي</h3>
+              <p class="ps-card-text">نظام الإحصاء الشامل مع دكتور وليد حجازي بيعلمك تفهم المنهج مش تحفظه — 7 محاضرات تبني عندك إطار كامل، فتدخل الامتحان واثق إنك شايف كل حاجة.</p>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </section>
+
+    <style>
+      #ps-section {
+        padding: 80px 24px;
+        background: var(--bg);
+        direction: rtl;
+      }
+      .ps-inner {
+        max-width: 860px;
+        margin: 0 auto;
+      }
+      .ps-headline {
+        font-size: clamp(28px, 5vw, 44px);
+        font-weight: 800;
+        font-family: 'Cairo', sans-serif;
+        color: #ffffff;
+        text-align: center;
+        margin: 0 0 16px;
+        line-height: 1.35;
+        letter-spacing: 0;
+      }
+      .ps-hl { color: #FF4500; }
+      .ps-sub {
+        font-family: 'Cairo', sans-serif;
+        font-size: 18px;
+        color: rgba(255,255,255,0.5);
+        text-align: center;
+        margin: 0 0 52px;
+      }
+      .ps-cards {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+      .ps-card {
+        flex: 1;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        border: 1px solid;
+      }
+      .ps-card--problem {
+        background: #0E0808;
+        border-color: rgba(239, 68, 68, 0.25);
+        box-shadow: 0 0 40px rgba(239, 68, 68, 0.05);
+      }
+      .ps-card--solution {
+        background: #080E0A;
+        border-color: rgba(34, 197, 94, 0.4);
+        box-shadow: 0 0 60px rgba(34, 197, 94, 0.15), 0 0 20px rgba(34, 197, 94, 0.08);
+      }
+      .ps-badge {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        font-size: 12px;
+        font-weight: 700;
+        font-family: 'Cairo', sans-serif;
+        padding: 4px 14px;
+        border-radius: 20px;
+        letter-spacing: 0;
+      }
+      .ps-badge--problem {
+        background: rgba(239, 68, 68, 0.15);
+        color: #EF4444;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+      }
+      .ps-badge--solution {
+        background: rgba(34, 197, 94, 0.15);
+        color: #22C55E;
+        border: 1px solid rgba(34, 197, 94, 0.35);
+      }
+      .ps-card-visual {
+        height: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 60px;
+      }
+      .ps-card-visual--problem {
+        background: linear-gradient(160deg, #1A0808 0%, #0E0808 100%);
+      }
+      .ps-card-visual--solution {
+        background: linear-gradient(160deg, #051A0A 0%, #080E0A 100%);
+      }
+      .ps-card-body-wrap {
+        padding: 24px;
+      }
+      .ps-card-title {
+        font-size: 20px;
+        font-weight: 700;
+        font-family: 'Cairo', sans-serif;
+        color: #ffffff;
+        margin: 0 0 12px;
+        line-height: 1.4;
+        letter-spacing: 0;
+      }
+      .ps-card-text {
+        font-size: 15px;
+        font-family: 'Cairo', sans-serif;
+        color: rgba(255,255,255,0.55);
+        line-height: 1.9;
+        margin: 0;
+      }
+      .ps-arrow {
+        font-size: 30px;
+        color: rgba(255,255,255,0.2);
+        flex-shrink: 0;
+        line-height: 1;
+        transform: rotate(90deg);
+      }
+      @media (max-width: 640px) {
+        .ps-cards {
+          flex-direction: column;
+        }
+        .ps-arrow {
+          text-align: center;
+          transform: none;
+        }
+        .ps-card-title { font-size: 18px; }
+      }
+    </style>
+
     <!-- ── Section separator ── -->
     <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:8px 0 16px;position:relative;z-index:2;">
       <div style="width:1px;height:32px;background:linear-gradient(to bottom,transparent,rgba(255,69,0,0.35));"></div>
@@ -395,8 +780,8 @@
 
         <!-- Pain section intro — redesigned for impact -->
         <div class="pain-intro">
-          <p class="pain-intro__eyebrow" style="font-family:'Cairo',sans-serif;direction:rtl;">٧ محاضرات. ٧ أيام. منهج كامل.</p>
-          <h2 class="pain-intro__headline" style="font-family:'Cairo',sans-serif;direction:rtl;letter-spacing:0;">اللي هتعمله<br>في الـ 7 أيام</h2>
+          <p class="pain-intro__eyebrow" style="font-family:'Cairo',sans-serif;direction:rtl;">٧ محاضرات.<br>٧ أيام.<br>منهج كامل.</p>
+          <h2 class="pain-intro__headline" style="font-family:'Cairo',sans-serif;direction:rtl;letter-spacing:0;">اللي هنعمله مع بعض<br>في الـ 7 أيام</h2>
           <div class="pain-intro__days" aria-hidden="true">
             <div class="pain-intro__day" data-day="1"><span class="pid-label">1</span><span class="pid-dot"></span></div>
             <div class="pain-intro__day-line"></div>
@@ -592,229 +977,13 @@
       </div>
     </section>
 
-    <!-- ============ BRIDGE ============ -->
-    <section id="bridge-section">
-
-      <!-- Part 1: Evidence card -->
-      <div class="bv2-card" id="bv2Card">
-        <span class="bv2-card-label">المشكلة مش إنك...</span>
-        <div class="bv2-row bv2-row--rtl">
-          <div class="bv2-x"><span>✕</span></div>
-          <span class="bv2-phrase">إن الوقت مش كفاية.</span>
-        </div>
-        <div class="bv2-row bv2-row--rtl">
-          <div class="bv2-x"><span>✕</span></div>
-          <span class="bv2-phrase">إن الإحصاء صعب.</span>
-        </div>
-        <div class="bv2-row bv2-row--rtl" style="margin-bottom:0">
-          <div class="bv2-x"><span>✕</span></div>
-          <span class="bv2-phrase">إنك مش بتذاكر كفاية.</span>
-        </div>
-      </div>
-
-      <!-- Part 2: Divider -->
-      <div class="bv2-divider-wrap">
-        <div class="bv2-divider" id="bv2Divider"></div>
-      </div>
-
-      <!-- Part 3: Verdict -->
-      <div class="bv2-verdict">
-        <p class="bv2-line1" id="bv2Line1">بتحفظ من غير ما تفهم.</p>
-        <p class="bv2-line2" id="bv2Line2">وفي الامتحان بتنسى كل حاجة.</p>
-      </div>
-
-    </section>
-
-    <style>
-      #bridge-section {
-        padding: 80px 24px;
-        background: var(--bg);
-      }
-      .bv2-card {
-        max-width: 480px;
-        margin: 0 auto;
-        background: #0D0D1A;
-        border: 1px solid rgba(255,69,0, 0.3);
-        border-radius: 20px;
-        padding: 32px;
-        box-shadow: 0 0 40px rgba(255,69,0, 0.08);
-        opacity: 0;
-        transform: translateY(24px);
-        transition: opacity 500ms ease-out, transform 500ms ease-out;
-        direction: rtl;
-      }
-      .bv2-card.is-visible { opacity: 1; transform: translateY(0); }
-      .bv2-card-label {
-        display: block;
-        font-size: 13px;
-        font-family: 'Cairo', sans-serif;
-        direction: rtl;
-        text-align: right;
-        letter-spacing: 0;
-        color: #666680;
-        margin-bottom: 28px;
-      }
-      .bv2-row {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        margin-bottom: 20px;
-      }
-      .bv2-row--rtl {
-        justify-content: flex-start;
-      }
-      .bv2-x {
-        width: 28px; height: 28px;
-        min-width: 28px;
-        border-radius: 50%;
-        background: #1A0A0A;
-        border: 1px solid rgba(239, 68, 68, 0.3);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-      }
-      .bv2-x span {
-        color: #EF4444;
-        font-size: 13px;
-        font-weight: 700;
-        line-height: 1;
-      }
-      .bv2-phrase {
-        font-size: 20px;
-        font-weight: 600;
-        color: #ffffff;
-        font-family: 'Cairo', sans-serif;
-        direction: rtl;
-        position: relative;
-        display: inline-block;
-      }
-      /* Animated strikethrough — RTL: starts from right */
-      .bv2-phrase::after {
-        content: '';
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        height: 2px;
-        width: 0;
-        background: rgba(239, 68, 68, 0.7);
-        border-radius: 1px;
-        transition: width 500ms cubic-bezier(.4, 0, .2, 1);
-      }
-      /* Stagger each line after card is visible */
-      .bv2-card.is-visible .bv2-row:nth-child(2) .bv2-phrase::after {
-        width: 100%;
-        transition-delay: 400ms;
-      }
-      .bv2-card.is-visible .bv2-row:nth-child(3) .bv2-phrase::after {
-        width: 100%;
-        transition-delay: 900ms;
-      }
-      .bv2-card.is-visible .bv2-row:nth-child(4) .bv2-phrase::after {
-        width: 100%;
-        transition-delay: 1400ms;
-      }
-      .bv2-divider-wrap {
-        display: flex;
-        justify-content: center;
-        margin: 48px 0;
-      }
-      .bv2-divider {
-        width: 80px; height: 2px;
-        background: #FF4500;
-        border-radius: 2px;
-        transform: scaleX(0);
-        transform-origin: center;
-        transition: transform 400ms ease-out, box-shadow 600ms ease-in-out;
-      }
-      .bv2-divider.is-grown  { transform: scaleX(1); }
-      .bv2-divider.is-pulsed { box-shadow: 0 0 12px rgba(255,69,0, 0.8); }
-      .bv2-divider.is-done   { box-shadow: none; }
-      .bv2-verdict { text-align: center; direction: rtl; }
-      .bv2-line1 {
-        font-size: clamp(32px, 6vw, 52px);
-        font-weight: 800;
-        color: #ffffff;
-        line-height: 1.3;
-        letter-spacing: 0;
-        margin: 0;
-        opacity: 0;
-        transform: translateY(16px);
-        transition: opacity 500ms ease-out, transform 500ms ease-out;
-        font-family: 'Cairo', sans-serif;
-      }
-      .bv2-line1.is-visible { opacity: 1; transform: translateY(0); }
-      .bv2-line2 {
-        font-size: 20px;
-        font-weight: 500;
-        color: #FF4500;
-        margin: 12px 0 0 0;
-        opacity: 0;
-        transition: opacity 400ms ease-out;
-        font-family: 'Cairo', sans-serif;
-      }
-      .bv2-line2.is-visible { opacity: 1; }
-      @media (max-width: 768px) {
-        .bv2-card   { max-width: 100%; padding: 24px; }
-        .bv2-phrase { font-size: 18px; }
-        .bv2-line2  { font-size: 18px; }
-      }
-    </style>
-
-    <script>
-      (function () {
-        const section  = document.getElementById('bridge-section');
-        const card     = document.getElementById('bv2Card');
-        const divider  = document.getElementById('bv2Divider');
-        const line1    = document.getElementById('bv2Line1');
-        const line2    = document.getElementById('bv2Line2');
-
-        const obs = new IntersectionObserver(function(entries) {
-          if (!entries[0].isIntersecting) return;
-          obs.disconnect();
-
-          // Step 1 — card in at t=0
-          card.classList.add('is-visible');
-
-          // Step 2 — divider grows at t=300ms
-          setTimeout(function() {
-            divider.classList.add('is-grown');
-          }, 300);
-
-          // Step 3 — divider pulse at t=700ms (after 400ms grow)
-          setTimeout(function() {
-            divider.classList.add('is-pulsed');
-          }, 700);
-
-          // Step 4 — pulse fades at t=1300ms
-          setTimeout(function() {
-            divider.classList.remove('is-pulsed');
-            divider.classList.add('is-done');
-          }, 1300);
-
-          // Step 5 — line1 at t=500ms
-          setTimeout(function() {
-            line1.classList.add('is-visible');
-          }, 500);
-
-          // Step 6 — line2 at t=1000ms (500ms after line1)
-          setTimeout(function() {
-            line2.classList.add('is-visible');
-          }, 1000);
-        }, { threshold: 0.30 });
-
-        obs.observe(section);
-      })();
-    </script>
-
     <!-- ============ THE OFFER ============ -->
     <section class="section section--reveal" id="offer-section">
       <div class="container container--narrow">
 
         <!-- Header -->
         <div class="offer-header" style="direction:rtl;">
-          <p class="eyebrow eyebrow--center" style="font-family:'Cairo',sans-serif;letter-spacing:0;">Introducing نظام الإحصاء الشامل</p>
+          <p class="eyebrow eyebrow--center" style="font-family:'Cairo',sans-serif;letter-spacing:0;">نظام الإحصاء الشامل</p>
           <h2 class="offer-headline" style="font-family:'Cairo',sans-serif;letter-spacing:0;line-height:1.3;">مش هتذاكر لوحدك.</h2>
           <p class="offer-subline" style="font-family:'Cairo',sans-serif;">تيم الدعم معاك طول اليوم.</p>
         </div>
@@ -873,7 +1042,7 @@
             <span class="offer-tag-sep">|</span>
             <span class="offer-tag">رد في دقائق</span>
           </div>
-          <p class="offer-closing offer-closing--rtl">مش بنبيعك كورس ونختفي.<br/>إحنا معاك من أول محاضرة لحد ما تخرج من الامتحان.</p>
+          <p class="offer-closing offer-closing--rtl">إحنا معاك من أول محاضرة لحد ما تخرج من الامتحان.</p>
         </div>
 
         <!-- VARIANT C: Bento grid -->
@@ -925,7 +1094,7 @@
 
         <!-- CTA -->
         <div style="text-align:center;margin-top:48px;">
-          <a href="#claim" class="btn btn--primary btn--xl" style="font-family:'Cairo',sans-serif;">احجز مكانك دلوقتي →</a>
+          <a href="#claim" class="btn btn--primary btn--xl" style="font-family:'Cairo',sans-serif;">اشترك في الكورس</a>
         </div>
 
       </div>
@@ -1571,7 +1740,7 @@
     </script>
 
     <!-- ============ CATCH ============ -->
-    <section id="catch-section">
+    <section id="catch-section" hidden style="display:none!important">
       <div class="catch-inner">
         <div class="catch-header">
           <div class="catch-title-wrap">
@@ -2234,172 +2403,8 @@
       }());
     </script>
 
-    <!-- ============ الجنرال بيكرم أبطاله ============ -->
-    <section id="general-section">
-      <style>
-        #general-section {
-          padding: 80px 20px;
-          background: #0a0a0a;
-          direction: rtl;
-          text-align: center;
-        }
-        .gen-eyebrow {
-          font-family: 'Cairo', sans-serif;
-          font-size: 0.8rem;
-          font-weight: 600;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: rgba(255, 107, 0, 0.75);
-          margin-bottom: 16px;
-        }
-        .gen-headline {
-          font-family: 'Cairo', sans-serif;
-          font-size: clamp(2rem, 6vw, 3.2rem);
-          font-weight: 900;
-          color: #fff;
-          line-height: 1.15;
-          margin-bottom: 12px;
-          letter-spacing: -0.01em;
-        }
-        .gen-sub {
-          font-family: 'Cairo', sans-serif;
-          font-size: 1rem;
-          color: rgba(200, 200, 200, 0.7);
-          margin-bottom: 48px;
-        }
-        .gen-grid {
-          column-count: 3;
-          column-gap: 14px;
-          max-width: 1000px;
-          margin: 0 auto 56px;
-        }
-        @media (max-width: 640px) {
-          .gen-grid { column-count: 2; column-gap: 10px; }
-        }
-        .gen-item {
-          break-inside: avoid;
-          margin-bottom: 14px;
-          border-radius: 12px;
-          overflow: hidden;
-          position: relative;
-          cursor: pointer;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .gen-item:hover {
-          transform: scale(1.02);
-          box-shadow: 0 0 20px rgba(255, 107, 0, 0.4);
-        }
-        .gen-item .gen-img {
-          width: 100%;
-          display: block;
-          background-color: #1a1a1a;
-          border-radius: 12px;
-        }
-        .gen-item .gen-overlay {
-          position: absolute;
-          bottom: 0; left: 0; right: 0;
-          height: 50%;
-          background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
-          border-radius: 0 0 12px 12px;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        }
-        .gen-item:hover .gen-overlay { opacity: 1; }
-        .gen-closing {
-          font-family: 'Cairo', sans-serif;
-          font-size: clamp(1.6rem, 4vw, 2.4rem);
-          font-weight: 800;
-          font-style: italic;
-          color: #ff6a00;
-          margin-bottom: 32px;
-          letter-spacing: 0.02em;
-        }
-        .gen-cta {
-          font-family: 'Cairo', sans-serif;
-          display: inline-block;
-          background: linear-gradient(135deg, #ff4500, #ff6a00);
-          color: #fff;
-          padding: 14px 40px;
-          border-radius: 10px;
-          font-weight: 700;
-          font-size: 1.05rem;
-          text-decoration: none;
-          box-shadow: 0 0 20px rgba(255, 69, 0, 0.4);
-          transition: filter 0.2s ease, transform 0.2s ease;
-        }
-        .gen-cta:hover {
-          filter: brightness(1.15);
-          transform: scale(1.03);
-        }
-        .gen-fade {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-        .gen-fade.is-visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      </style>
-
-      <p class="gen-eyebrow gen-fade">من وسطنا</p>
-      <h2 class="gen-headline gen-fade" style="transition-delay:0.1s;">طلاب دكتور وليد حجازي</h2>
-
-      <!-- Masonry Grid -->
-      <div class="gen-grid gen-fade" style="transition-delay:0.3s;">
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.08.jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.09.jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.09 (1).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.09 (2).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.09 (3).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.10.jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.10 (1).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.10 (2).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.11.jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.11 (1).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.11 (2).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.11 (3).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.12.jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.12 (1).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.12 (2).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.13.jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.13 (1).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.13 (2).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.13 (3).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.13 (4).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.14.jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.14 (1).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.14 (2).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.15.jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.15 (1).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.15 (2).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.15 (3).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.16.jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.16 (1).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.16 (2).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
-      </div>
-
-      <p class="gen-closing gen-fade" style="transition-delay:0.4s;">إنت الجاي ✦</p>
-      <a href="#claim" class="gen-cta gen-fade" style="transition-delay:0.5s;">احجز مكانك دلوقتي</a>
-
-      <script>
-        (function () {
-          var els = document.querySelectorAll('#general-section .gen-fade');
-          var obs = new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) {
-                e.target.classList.add('is-visible');
-                obs.unobserve(e.target);
-              }
-            });
-          }, { threshold: 0.12 });
-          els.forEach(function (el) { obs.observe(el); });
-        }());
-      </script>
-    </section>
-
-    <!-- ============ SOCIAL PROOF ============ -->
-    <section id="social-proof">
+    <!-- ============ SOCIAL PROOF (hidden) ============ -->
+    <section id="social-proof" hidden>
       <div class="sp-inner">
 
         <p class="sp-eyebrow">Results from the field</p>
@@ -2777,11 +2782,116 @@
         </div>
       </div>
 
-      <!-- Summary -->
+      <!-- Summary — scratch card -->
       <div class="wyg-summary">
-        <p class="wyg-now">400 جنية فقط</p>
-        <a href="payment.html" class="wyg-cta">اشترك الآن</a>
+        <div class="scratch-wrap" id="scratchWrap2" style="border-radius:12px;overflow:hidden;position:relative;cursor:crosshair;">
+          <div class="scratch-reveal" id="scratchReveal2" style="padding:28px 20px;text-align:center;background:#111;direction:rtl;">
+            <p style="font-family:'Cairo',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.45);margin-bottom:8px;">السعر الأصلي</p>
+            <p style="font-family:'Cairo',sans-serif;font-size:1.3rem;color:rgba(255,255,255,0.35);text-decoration:line-through;margin-bottom:4px;">500 جنية</p>
+            <p style="font-family:'Cairo',sans-serif;font-size:2rem;font-weight:900;color:#ff6a00;margin-bottom:4px;">400 جنية فقط 🔥</p>
+            <p style="font-family:'Cairo',sans-serif;font-size:0.9rem;font-weight:700;color:#4ade80;margin-bottom:8px;">وفرت 100 جنية 🎉</p>
+            <p style="font-family:'Cairo',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.4);margin-bottom:0;">السعر ده مش هيفضل — اشترك دلوقتي</p>
+          </div>
+          <canvas class="scratch-canvas" id="scratchCanvas2"></canvas>
+          <div class="scratch-hint" id="scratchHint2">
+            <span class="scratch-finger">🤫</span>
+            <span class="scratch-hint-text">اكشط عشان تعرف 🤫</span>
+          </div>
+        </div>
+        <div id="scratchCTA2Wrap" style="overflow:hidden;max-height:0;opacity:0;transition:max-height 0.6s ease,opacity 0.5s ease,margin-top 0.6s ease;margin-top:0;">
+          <a href="payment.html" class="wyg-cta" style="display:block;margin-top:16px;">اشترك دلوقتي</a>
+        </div>
       </div>
+
+      <script>
+        (function () {
+          var wrap   = document.getElementById('scratchWrap2');
+          var canvas = document.getElementById('scratchCanvas2');
+          var hint   = document.getElementById('scratchHint2');
+          if (!wrap || !canvas) return;
+          var ctx; var isDrawing = false; var scratched = false; var BRUSH = 44;
+          var checkThrottle = 0; var scratchTimer = null;
+          function revealCTA() {
+            if (scratched) return;
+            scratched = true;
+            canvas.style.transition = 'opacity 600ms ease';
+            canvas.style.opacity = '0';
+            setTimeout(function () {
+              canvas.style.display = 'none';
+              var ctaWrap = document.getElementById('scratchCTA2Wrap');
+              if (ctaWrap) {
+                ctaWrap.style.maxHeight = '120px';
+                ctaWrap.style.opacity = '1';
+              }
+            }, 600);
+          }
+          function initCanvas() {
+            var rect = wrap.getBoundingClientRect();
+            var dpr = window.devicePixelRatio || 1;
+            canvas.width  = rect.width  * dpr;
+            canvas.height = rect.height * dpr;
+            canvas.style.width  = rect.width  + 'px';
+            canvas.style.height = rect.height + 'px';
+            ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+            var w = rect.width; var h = rect.height;
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.fillStyle = '#16112b';
+            ctx.fillRect(0, 0, w, h);
+            for (var g = 0; g < w * h * 0.08; g++) {
+              var gx = Math.random() * w; var gy = Math.random() * h;
+              ctx.fillStyle = Math.random() > 0.5 ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.12)';
+              ctx.fillRect(gx, gy, 1, 1);
+            }
+            var grad = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, w * 0.45);
+            grad.addColorStop(0, 'rgba(255,69,0,0.12)');
+            grad.addColorStop(1, 'rgba(255,69,0,0)');
+            ctx.fillStyle = grad; ctx.fillRect(0, 0, w, h);
+            ctx.fillStyle = 'rgba(255,255,255,0.22)';
+            ctx.font = '700 13px Cairo, sans-serif';
+            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            ctx.fillText('🤫 في مفاجأة ليك — اكشط', w / 2, h / 2);
+          }
+          function getPos(e) {
+            var rect = canvas.getBoundingClientRect();
+            var src = e.touches ? e.touches[0] : e;
+            return { x: src.clientX - rect.left, y: src.clientY - rect.top };
+          }
+          function scratch(x, y) {
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.beginPath(); ctx.arc(x, y, BRUSH, 0, Math.PI * 2); ctx.fill();
+          }
+          function checkComplete() {
+            if (scratched) return;
+            var now = Date.now();
+            if (now - checkThrottle < 250) return;
+            checkThrottle = now;
+            var dpr = window.devicePixelRatio || 1;
+            var sw = Math.floor(canvas.width / dpr / 2); var sh = Math.floor(canvas.height / dpr / 2);
+            if (sw < 1 || sh < 1) return;
+            var data = ctx.getImageData(0, 0, sw, sh).data;
+            var total = sw * sh; var clear = 0;
+            for (var i = 3; i < data.length; i += 4) { if (data[i] === 0) clear++; }
+            if (clear / total > 0.75) { revealCTA(); }
+          }
+          function onScratchStart(e) {
+            if (scratched) return;
+            isDrawing = true;
+            if (hint) hint.classList.add('is-hidden');
+            var p = getPos(e); scratch(p.x, p.y);
+            if (!scratchTimer) {
+              scratchTimer = setTimeout(revealCTA, 4000);
+            }
+          }
+          canvas.addEventListener('mousedown', onScratchStart);
+          canvas.addEventListener('mousemove', function (e) { if (!isDrawing || scratched) return; var p = getPos(e); scratch(p.x, p.y); checkComplete(); });
+          window.addEventListener('mouseup', function () { if (isDrawing) { isDrawing = false; checkComplete(); } });
+          canvas.addEventListener('touchstart', function (e) { e.preventDefault(); onScratchStart(e); }, { passive: false });
+          canvas.addEventListener('touchmove', function (e) { e.preventDefault(); if (!isDrawing || scratched) return; var p = getPos(e); scratch(p.x, p.y); checkComplete(); }, { passive: false });
+          window.addEventListener('touchend', function () { if (isDrawing) { isDrawing = false; checkComplete(); } });
+          if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initCanvas); } else { initCanvas(); }
+        }());
+      </script>
     </section>
 
     <!-- ============ CLAIM / FORM ============ -->
@@ -2879,20 +2989,20 @@
       </style>
 
       <!-- Hidden GHL iframe — keeps the lead in CRM -->
-      <iframe
-        src="https://api.leadconnectorhq.com/widget/form/kWaZrDRGaU7FqCL7g5Pd"
-        id="ghl-hidden-iframe"
-        data-form-id="kWaZrDRGaU7FqCL7g5Pd"
-        data-layout="{'id':'INLINE'}"
-        data-trigger-type="alwaysShow"
-        data-activation-type="alwaysActivated"
-        data-deactivation-type="neverDeactivate"
-        data-form-name="Waleed Hegazy"
-        style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px;"
-        tabindex="-1"
-        aria-hidden="true"
-      ></iframe>
-      <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+      <div style="position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;opacity:0;left:-9999px;" aria-hidden="true">
+        <iframe
+          src="https://api.leadconnectorhq.com/widget/form/kWaZrDRGaU7FqCL7g5Pd"
+          id="ghl-hidden-iframe"
+          data-form-id="kWaZrDRGaU7FqCL7g5Pd"
+          data-layout="{'id':'INLINE'}"
+          data-trigger-type="alwaysShow"
+          data-activation-type="alwaysActivated"
+          data-deactivation-type="neverDeactivate"
+          data-form-name="Waleed Hegazy"
+          tabindex="-1"
+        ></iframe>
+        <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+      </div>
 
       <h2 class="claim-headline">سجل بياناتك دلوقتي</h2>
       <p class="claim-sub">وهنتواصل معاك فوراً</p>
@@ -3042,12 +3152,6 @@
             </div>
           </details>
           <details class="faq__item">
-            <summary class="faq__q faq__q--ar">الكورس بيشرح مناهج إيه؟</summary>
-            <div class="faq__a faq__a--ar">
-              <p>الكورس مخصص لطلاب تالتة ثانوي — بيغطي منهج الإحصاء كامل.</p>
-            </div>
-          </details>
-          <details class="faq__item">
             <summary class="faq__q faq__q--ar">هقدر أرجع للمحاضرات تاني؟</summary>
             <div class="faq__a faq__a--ar">
               <p>آه، الكورس lifetime access — تقدر تشوفه في أي وقت على أي جهاز.</p>
@@ -3072,21 +3176,9 @@
             </div>
           </details>
           <details class="faq__item">
-            <summary class="faq__q faq__q--ar">الكورس ده بس للإحصاء ولا فيه رياضة كمان؟</summary>
-            <div class="faq__a faq__a--ar">
-              <p>الكورس متخصص في الإحصاء بس — بس المحاضرة الأولى بتغطي أساسيات الرياضة اللي محتاجها عشان تفهم الإحصاء صح.</p>
-            </div>
-          </details>
-          <details class="faq__item">
             <summary class="faq__q faq__q--ar">هيفرق معايا لو اشتريت دلوقتي أو بعدين؟</summary>
             <div class="faq__a faq__a--ar">
               <p>الأسعار ممكن تتغير — والأماكن محدودة. الأضمن إنك تحجز دلوقتي وتبدأ في أي وقت.</p>
-            </div>
-          </details>
-          <details class="faq__item">
-            <summary class="faq__q faq__q--ar">الكورس ده بيحضرني للامتحان بس ولا هيفيدني في أي حاجة تانية؟</summary>
-            <div class="faq__a faq__a--ar">
-              <p>هدفه الأساسي إنك تجيب أعلى درجة في امتحان الثانوية — بس الفهم الحقيقي اللي هتاخده هينفعك في أي حاجة بعد كده.</p>
             </div>
           </details>
           <details class="faq__item">
@@ -3095,14 +3187,155 @@
               <p>الكورس موجود بالكامل على منصة فالح — بتدخل عليه من أي جهاز في أي وقت.</p>
             </div>
           </details>
-          <details class="faq__item">
-            <summary class="faq__q faq__q--ar">لو اشتريت وحسيت إن الكورس مش مناسب ليا؟</summary>
-            <div class="faq__a faq__a--ar">
-              <p>كلمنا على WhatsApp وهنحل الموضوع — إحنا مش هنا نبيع وبس، إحنا عايزينك تنجح.</p>
-            </div>
-          </details>
         </div>
       </div>
+    </section>
+
+    <!-- ============ الجنرال بيكرم أبطاله ============ -->
+    <section id="general-section">
+      <style>
+        #general-section {
+          padding: 80px 20px;
+          background: #0a0a0a;
+          direction: rtl;
+          text-align: center;
+        }
+        .gen-eyebrow {
+          font-family: 'Cairo', sans-serif;
+          font-size: 0.8rem;
+          font-weight: 600;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: rgba(255, 107, 0, 0.75);
+          margin-bottom: 16px;
+        }
+        .gen-headline {
+          font-family: 'Cairo', sans-serif;
+          font-size: clamp(2rem, 6vw, 3.2rem);
+          font-weight: 900;
+          color: #fff;
+          line-height: 1.15;
+          margin-bottom: 12px;
+          letter-spacing: -0.01em;
+        }
+        .gen-sub {
+          font-family: 'Cairo', sans-serif;
+          font-size: 1rem;
+          color: rgba(200, 200, 200, 0.7);
+          margin-bottom: 48px;
+        }
+        .gen-grid {
+          column-count: 3;
+          column-gap: 14px;
+          max-width: 1000px;
+          margin: 0 auto 56px;
+        }
+        @media (max-width: 640px) {
+          .gen-grid { column-count: 2; column-gap: 10px; }
+        }
+        .gen-item {
+          break-inside: avoid;
+          margin-bottom: 14px;
+          border-radius: 12px;
+          overflow: hidden;
+          position: relative;
+          cursor: pointer;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gen-item:hover {
+          transform: scale(1.02);
+          box-shadow: 0 0 20px rgba(255, 107, 0, 0.4);
+        }
+        .gen-item .gen-img {
+          width: 100%;
+          display: block;
+          background-color: #1a1a1a;
+          border-radius: 12px;
+        }
+        .gen-item .gen-overlay {
+          position: absolute;
+          bottom: 0; left: 0; right: 0;
+          height: 50%;
+          background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
+          border-radius: 0 0 12px 12px;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+        .gen-item:hover .gen-overlay { opacity: 1; }
+        .gen-closing {
+          font-family: 'Cairo', sans-serif;
+          font-size: clamp(1.6rem, 4vw, 2.4rem);
+          font-weight: 800;
+          font-style: italic;
+          color: #ff6a00;
+          margin-bottom: 32px;
+          letter-spacing: 0.02em;
+        }
+        .gen-cta {
+          font-family: 'Cairo', sans-serif;
+          display: inline-block;
+          background: linear-gradient(135deg, #ff4500, #ff6a00);
+          color: #fff;
+          padding: 14px 40px;
+          border-radius: 10px;
+          font-weight: 700;
+          font-size: 1.05rem;
+          text-decoration: none;
+          box-shadow: 0 0 20px rgba(255, 69, 0, 0.4);
+          transition: filter 0.2s ease, transform 0.2s ease;
+        }
+        .gen-cta:hover {
+          filter: brightness(1.15);
+          transform: scale(1.03);
+        }
+        .gen-fade {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .gen-fade.is-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      </style>
+
+      <p class="gen-eyebrow gen-fade">من وسطنا</p>
+      <h2 class="gen-headline gen-fade" style="transition-delay:0.1s;">طلاب دكتور وليد حجازي</h2>
+
+      <!-- Masonry Grid -->
+      <div class="gen-grid gen-fade" style="transition-delay:0.3s;">
+        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.09 (3).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
+        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.10.jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
+        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.10 (1).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
+        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.10 (2).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
+        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.11.jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
+        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.11 (1).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
+        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.11 (2).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
+        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.11 (3).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
+        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.12.jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
+        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.12 (1).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
+        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.12 (2).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
+        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.13.jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
+        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.13 (2).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
+        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.13 (3).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
+        <div class="gen-item"><img class="gen-img" src="Testimonies/WhatsApp Image 2026-05-03 at 21.12.16 (2).jpeg" alt="شهادة طالب" loading="lazy"><div class="gen-overlay"></div></div>
+      </div>
+
+
+      <script>
+        (function () {
+          var els = document.querySelectorAll('#general-section .gen-fade');
+          var obs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                obs.unobserve(e.target);
+              }
+            });
+          }, { threshold: 0.12 });
+          els.forEach(function (el) { obs.observe(el); });
+        }());
+      </script>
     </section>
 
     <!-- ============ FINAL CTA ============ -->
@@ -3454,14 +3687,13 @@
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
-        <img src="../assets/logo.jpg" alt="SkipOwls" class="footer__logo" />
-        <span>SkipOwls</span>
+        <img src="Fallih Logo.png" alt="فالح" class="footer__logo" />
+        <span style="font-family:'Cairo',sans-serif;">فالح</span>
       </div>
       <div class="footer__contact">
-        <a href="mailto:hello@skipowls.com">hello@skipowls.com</a>
-        <a href="https://wa.me/" target="_blank" rel="noopener">WhatsApp us</a>
+        <a href="https://wa.me/" target="_blank" rel="noopener" style="font-family:'Cairo',sans-serif;">تواصل معنا على WhatsApp</a>
       </div>
-      <div class="footer__copy">© <span id="year"></span> SkipOwls. Built for Egyptian agencies running US outbound.</div>
+      <div class="footer__copy" style="font-family:'Cairo',sans-serif;">© <span id="year"></span> فالح. جميع الحقوق محفوظة.</div>
     </div>
   </footer>
 
