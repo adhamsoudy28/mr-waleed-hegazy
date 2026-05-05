@@ -2955,13 +2955,49 @@
           border-color: rgba(255,106,0,0.6);
           box-shadow: 0 0 0 3px rgba(255,106,0,0.1);
         }
-        .cf-input--valid {
+        .cf-input--valid,
+        .cf-phone-wrapper.cf-input--valid {
           border-color: rgba(34,197,94,0.7) !important;
           box-shadow: 0 0 0 3px rgba(34,197,94,0.1) !important;
         }
-        .cf-input--invalid {
+        .cf-input--invalid,
+        .cf-phone-wrapper.cf-input--invalid {
           border-color: rgba(239,68,68,0.7) !important;
           box-shadow: 0 0 0 3px rgba(239,68,68,0.1) !important;
+        }
+        .cf-phone-wrapper {
+          display: flex;
+          align-items: center;
+          background: #1a1a1a;
+          border: 1px solid rgba(255,255,255,0.12);
+          border-radius: 10px;
+          overflow: hidden;
+          transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .cf-phone-wrapper:focus-within {
+          border-color: rgba(255,106,0,0.6);
+          box-shadow: 0 0 0 3px rgba(255,106,0,0.1);
+        }
+        .cf-phone-prefix {
+          padding: 13px 12px;
+          font-family: 'Cairo', sans-serif;
+          font-size: 1rem;
+          color: rgba(255,255,255,0.45);
+          border-left: 1px solid rgba(255,255,255,0.12);
+          flex-shrink: 0;
+          user-select: none;
+          direction: ltr;
+          letter-spacing: 0.02em;
+        }
+        .cf-input--phone {
+          flex: 1;
+          min-width: 0;
+          border: none !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          background: transparent !important;
+          direction: ltr;
+          text-align: left;
         }
         .cf-phone-hint {
           display: block;
@@ -3035,7 +3071,10 @@
           </div>
           <div class="cf-group">
             <label class="cf-label" for="cf_phone">رقم التليفون <span style="color:#ff6a00">*</span></label>
-            <input class="cf-input" type="tel" id="cf_phone" placeholder="01XXXXXXXXX" autocomplete="tel" inputmode="numeric" />
+            <div class="cf-phone-wrapper" id="cf_phone_wrapper">
+              <span class="cf-phone-prefix">+20</span>
+              <input class="cf-input cf-input--phone" type="tel" id="cf_phone" placeholder="1XXXXXXXXX" autocomplete="tel" inputmode="numeric" maxlength="11" />
+            </div>
             <span class="cf-error" id="cf_phone_err">من فضلك ادخل رقم تليفونك</span>
             <span class="cf-phone-hint" id="cf_phone_hint"></span>
           </div>
@@ -3050,47 +3089,53 @@
           var btn   = document.getElementById('cf_btn');
           var ghlId = 'kWaZrDRGaU7FqCL7g5Pd';
 
-          var phoneInput = document.getElementById('cf_phone');
-          var phoneHint  = document.getElementById('cf_phone_hint');
+          var phoneWrapper = document.getElementById('cf_phone_wrapper');
+          var phoneInput   = document.getElementById('cf_phone');
+          var phoneHint    = document.getElementById('cf_phone_hint');
+
+          /* Strip leading 0 so both "10XXXXXXXX" and "010XXXXXXXX" work */
+          function normalizeDigits(raw) {
+            var d = raw.replace(/\D/g, '');
+            if (d.startsWith('0')) d = d.slice(1);
+            return d;
+          }
 
           function isValidEgyptianPhone(raw) {
-            var digits = raw.replace(/\D/g, '');
-            /* Accept with or without leading country code */
-            if (digits.length === 12 && digits.startsWith('20')) digits = '0' + digits.slice(2);
-            return /^01[0125]\d{8}$/.test(digits);
+            return /^1[0125]\d{8}$/.test(normalizeDigits(raw));
           }
 
           function formatEgyptianPhone(raw) {
-            var digits = raw.replace(/\D/g, '');
-            if (digits.startsWith('0')) digits = '2' + digits;
-            if (!digits.startsWith('+')) digits = '+' + digits;
-            return digits;
+            return '+20' + normalizeDigits(raw);
           }
 
           function setPhoneState(state, msg) {
-            phoneInput.classList.remove('cf-input--valid', 'cf-input--invalid');
+            phoneWrapper.classList.remove('cf-input--valid', 'cf-input--invalid');
             phoneHint.className = 'cf-phone-hint';
             if (state === 'valid') {
-              phoneInput.classList.add('cf-input--valid');
+              phoneWrapper.classList.add('cf-input--valid');
               phoneHint.classList.add('cf-phone-hint--valid');
             } else if (state === 'invalid') {
-              phoneInput.classList.add('cf-input--invalid');
+              phoneWrapper.classList.add('cf-input--invalid');
               phoneHint.classList.add('cf-phone-hint--invalid');
             }
             phoneHint.textContent = msg || '';
           }
 
           phoneInput.addEventListener('input', function () {
-            var digits = this.value.replace(/\D/g, '');
-            if (digits.length < 10) { setPhoneState('', ''); return; }
-            if (isValidEgyptianPhone(this.value)) {
+            /* Block non-numeric characters */
+            var clean = this.value.replace(/\D/g, '');
+            if (clean !== this.value) this.value = clean;
+
+            var norm = normalizeDigits(clean);
+            if (norm.length < 9) { setPhoneState('', ''); return; }
+            if (/^1[0125]\d{8}$/.test(norm)) {
               setPhoneState('valid', '✓ رقم صح');
-            } else if (digits.length >= 11 && !/^01[0125]/.test(digits)) {
-              setPhoneState('invalid', 'الرقم لازم يبدأ بـ 010 أو 011 أو 012 أو 015');
-            } else if (digits.length > 11) {
-              setPhoneState('invalid', 'الرقم أطول من اللازم — لازم يكون 11 رقم');
+            } else if (norm.length >= 10 && !/^1[0125]/.test(norm)) {
+              setPhoneState('invalid', 'الرقم لازم يبدأ بـ 10 أو 11 أو 12 أو 15');
+            } else if (norm.length > 10) {
+              setPhoneState('invalid', 'الرقم أطول من اللازم');
             } else {
-              setPhoneState('invalid', 'رقم ناقص — لازم يكون 11 رقم');
+              setPhoneState('invalid', 'رقم ناقص');
             }
           });
 
@@ -3108,7 +3153,7 @@
               if (!phone) {
                 document.getElementById('cf_phone_err').style.display = 'block';
               } else {
-                setPhoneState('invalid', 'الرقم لازم يبدأ بـ 010 أو 011 أو 012 أو 015');
+                setPhoneState('invalid', 'الرقم لازم يبدأ بـ 10 أو 11 أو 12 أو 15');
               }
               valid = false;
             }
