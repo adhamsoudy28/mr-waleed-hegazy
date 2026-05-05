@@ -2955,6 +2955,25 @@
           border-color: rgba(255,106,0,0.6);
           box-shadow: 0 0 0 3px rgba(255,106,0,0.1);
         }
+        .cf-input--valid {
+          border-color: rgba(34,197,94,0.7) !important;
+          box-shadow: 0 0 0 3px rgba(34,197,94,0.1) !important;
+        }
+        .cf-input--invalid {
+          border-color: rgba(239,68,68,0.7) !important;
+          box-shadow: 0 0 0 3px rgba(239,68,68,0.1) !important;
+        }
+        .cf-phone-hint {
+          display: block;
+          font-family: 'Cairo', sans-serif;
+          font-size: 0.82rem;
+          margin-top: 6px;
+          min-height: 18px;
+          direction: rtl;
+          text-align: right;
+        }
+        .cf-phone-hint--valid  { color: #22C55E; }
+        .cf-phone-hint--invalid { color: #EF4444; }
         .cf-submit {
           width: 100%;
           font-family: 'Cairo', sans-serif;
@@ -3016,8 +3035,9 @@
           </div>
           <div class="cf-group">
             <label class="cf-label" for="cf_phone">رقم التليفون <span style="color:#ff6a00">*</span></label>
-            <input class="cf-input" type="tel" id="cf_phone" placeholder="01XXXXXXXXX" autocomplete="tel" />
+            <input class="cf-input" type="tel" id="cf_phone" placeholder="01XXXXXXXXX" autocomplete="tel" inputmode="numeric" />
             <span class="cf-error" id="cf_phone_err">من فضلك ادخل رقم تليفونك</span>
+            <span class="cf-phone-hint" id="cf_phone_hint"></span>
           </div>
           <button class="cf-submit" type="submit" id="cf_btn">اشترك الآن</button>
           <p class="cf-note">بعد التسجيل هتتحول لصفحة الدفع فوراً</p>
@@ -3030,27 +3050,66 @@
           var btn   = document.getElementById('cf_btn');
           var ghlId = 'kWaZrDRGaU7FqCL7g5Pd';
 
+          var phoneInput = document.getElementById('cf_phone');
+          var phoneHint  = document.getElementById('cf_phone_hint');
+
+          function isValidEgyptianPhone(raw) {
+            var digits = raw.replace(/\D/g, '');
+            /* Accept with or without leading country code */
+            if (digits.length === 12 && digits.startsWith('20')) digits = '0' + digits.slice(2);
+            return /^01[0125]\d{8}$/.test(digits);
+          }
+
           function formatEgyptianPhone(raw) {
             var digits = raw.replace(/\D/g, '');
-            /* 01XXXXXXXXX → +201XXXXXXXXX */
             if (digits.startsWith('0')) digits = '2' + digits;
-            /* 201XXXXXXXXX → +201XXXXXXXXX */
             if (!digits.startsWith('+')) digits = '+' + digits;
             return digits;
           }
+
+          function setPhoneState(state, msg) {
+            phoneInput.classList.remove('cf-input--valid', 'cf-input--invalid');
+            phoneHint.className = 'cf-phone-hint';
+            if (state === 'valid') {
+              phoneInput.classList.add('cf-input--valid');
+              phoneHint.classList.add('cf-phone-hint--valid');
+            } else if (state === 'invalid') {
+              phoneInput.classList.add('cf-input--invalid');
+              phoneHint.classList.add('cf-phone-hint--invalid');
+            }
+            phoneHint.textContent = msg || '';
+          }
+
+          phoneInput.addEventListener('input', function () {
+            var digits = this.value.replace(/\D/g, '');
+            if (digits.length < 10) { setPhoneState('', ''); return; }
+            if (isValidEgyptianPhone(this.value)) {
+              setPhoneState('valid', '✓ رقم صح');
+            } else if (digits.length >= 11 && !/^01[0125]/.test(digits)) {
+              setPhoneState('invalid', 'الرقم لازم يبدأ بـ 010 أو 011 أو 012 أو 015');
+            } else if (digits.length > 11) {
+              setPhoneState('invalid', 'الرقم أطول من اللازم — لازم يكون 11 رقم');
+            } else {
+              setPhoneState('invalid', 'رقم ناقص — لازم يكون 11 رقم');
+            }
+          });
 
           form.addEventListener('submit', function (e) {
             e.preventDefault();
 
             var name  = document.getElementById('cf_name').value.trim();
-            var phone = document.getElementById('cf_phone').value.trim();
+            var phone = phoneInput.value.trim();
             var valid = true;
 
             document.getElementById('cf_name_err').style.display  = 'none';
             document.getElementById('cf_phone_err').style.display = 'none';
 
-            if (!phone) {
-              document.getElementById('cf_phone_err').style.display = 'block';
+            if (!phone || !isValidEgyptianPhone(phone)) {
+              if (!phone) {
+                document.getElementById('cf_phone_err').style.display = 'block';
+              } else {
+                setPhoneState('invalid', 'الرقم لازم يبدأ بـ 010 أو 011 أو 012 أو 015');
+              }
               valid = false;
             }
             if (!valid) return;
