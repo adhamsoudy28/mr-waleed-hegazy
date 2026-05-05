@@ -252,6 +252,60 @@
       line-height: 1.5;
     }
 
+    /* ── STEPS ── */
+    .pay-steps {
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .pay-steps-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .pay-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .pay-step:last-child { border-bottom: none; }
+    .pay-step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff4500, #ff6a00);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .pay-step-body {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding-top: 4px;
+    }
+    .pay-step-body strong {
+      font-size: 0.95rem;
+      color: #fff;
+      font-weight: 700;
+    }
+    .pay-step-body span {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.5;
+    }
+
     /* ── FOOTER NOTE ── */
     .pay-note {
       text-align: center;
@@ -283,6 +337,46 @@
       <p class="pay-original">القيمة الكلية: 500 جنية</p>
       <div class="pay-price"><span>بـ </span>400<span> جنية فقط</span></div>
       <span class="pay-egp">السعر بالمصري: 400 جنية</span>
+    </div>
+
+    <!-- Steps -->
+    <div class="pay-steps">
+      <p class="pay-steps-title">📋 خطوات الاشتراك — بسيطة وسريعة</p>
+      <div class="pay-step">
+        <div class="pay-step-num">1</div>
+        <div class="pay-step-body">
+          <strong>اختار طريقة الدفع</strong>
+          <span>InstaPay أو فودافون كاش — اللي أسهل عليك</span>
+        </div>
+      </div>
+      <div class="pay-step">
+        <div class="pay-step-num">2</div>
+        <div class="pay-step-body">
+          <strong>ابعت 400 جنية على الرقم</strong>
+          <span>الرقم: 01124949674</span>
+        </div>
+      </div>
+      <div class="pay-step">
+        <div class="pay-step-num">3</div>
+        <div class="pay-step-body">
+          <strong>خد سكرين شوت لتأكيد العملية</strong>
+          <span>التأكيد اللي بيظهر بعد الدفع مباشرةً</span>
+        </div>
+      </div>
+      <div class="pay-step">
+        <div class="pay-step-num">4</div>
+        <div class="pay-step-body">
+          <strong>ابعت السكرين شوت على الواتساب</strong>
+          <span>اضغط زر الواتساب في الأسفل وابعت الصورة</span>
+        </div>
+      </div>
+      <div class="pay-step">
+        <div class="pay-step-num">5</div>
+        <div class="pay-step-body">
+          <strong>هيتم تفعيل اشتراكك فوراً ✓</strong>
+          <span>هتوصلك رابط الكورس على الواتساب في أقل من دقيقة</span>
+        </div>
+      </div>
     </div>
 
     <!-- Payment Methods -->
