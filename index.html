@@ -1761,7 +1761,7 @@
           <!-- Hint -->
           <div class="scratch-hint" id="scratchHint">
             <span class="scratch-finger">👆</span>
-            <span class="scratch-hint-text">Scratch to reveal</span>
+            <span class="scratch-hint-text">خربش عشان تعرف</span>
           </div>
         </div>
 
@@ -2795,7 +2795,7 @@
           <canvas class="scratch-canvas" id="scratchCanvas2"></canvas>
           <div class="scratch-hint" id="scratchHint2">
             <span class="scratch-finger">🤫</span>
-            <span class="scratch-hint-text">اكشط عشان تعرف 🤫</span>
+            <span class="scratch-hint-text">خربش الكرت عشان تعرف 🤫</span>
           </div>
         </div>
         <div id="scratchCTA2Wrap" style="overflow:hidden;max-height:0;opacity:0;transition:max-height 0.6s ease,opacity 0.5s ease,margin-top 0.6s ease;margin-top:0;">
@@ -2850,7 +2850,7 @@
             ctx.fillStyle = 'rgba(255,255,255,0.22)';
             ctx.font = '700 13px Cairo, sans-serif';
             ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-            ctx.fillText('🤫 في مفاجأة ليك — اكشط', w / 2, h / 2);
+            ctx.fillText('🤫 في مفاجأة ليك — خربش', w / 2, h / 2);
           }
           function getPos(e) {
             var rect = canvas.getBoundingClientRect();
@@ -3049,11 +3049,17 @@
             btn.disabled = true;
             btn.textContent = 'جاري التسجيل...';
 
-            /* Send to GHL silently */
-            fetch('https://services.leadconnectorhq.com/forms/' + ghlId + '/submissions', {
+            /* Send to GHL via internal form submit endpoint */
+            var fd = new FormData();
+            fd.append('formData', JSON.stringify({
+              full_name: name,
+              phone: phone,
+              formId: ghlId,
+              locationId: 'ZIWBCqESmX7syIsIakSz'
+            }));
+            fetch('https://backend.leadconnectorhq.com/forms/submit', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ full_name: name, phone: phone, formId: ghlId }),
+              body: fd,
               mode: 'no-cors'
             }).catch(function(){});
 
