@@ -47,42 +47,38 @@
       width: 100%;
       border-radius: 16px;
       overflow: hidden;
-      background: linear-gradient(135deg, #1a0a2e, #2d0a3e);
-      min-height: 200px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 32px 24px;
       text-align: center;
       border: 1px solid rgba(255,69,0,0.2);
       box-shadow: 0 0 40px rgba(255,69,0,0.1);
     }
-    .pay-banner-logo {
-      width: 60px;
-      height: 60px;
-      object-fit: contain;
-      margin-bottom: 16px;
+    .pay-banner-img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
     }
-    .pay-banner-title {
-      font-size: 1.6rem;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-    .pay-banner-sub {
-      font-size: 0.95rem;
-      color: rgba(255,255,255,0.65);
+    .pay-banner-body {
+      background: linear-gradient(135deg, #1a0a2e, #2d0a3e);
+      width: 100%;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
     }
     .pay-banner-badge {
-      margin-top: 16px;
       background: linear-gradient(135deg, #ff4500, #ff6a00);
       color: #fff;
-      font-size: 0.85rem;
-      font-weight: 700;
-      padding: 6px 18px;
+      font-size: 1rem;
+      font-weight: 800;
+      padding: 8px 24px;
       border-radius: 999px;
+    }
+    .pay-banner-sub {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
     }
 
     /* ── PRICING ── */
@@ -326,10 +322,11 @@
 
     <!-- Banner -->
     <div class="pay-banner">
-      <img src="Fallih Logo.png" alt="فالح" class="pay-banner-logo" />
-      <h1 class="pay-banner-title">كورس الاستاتيكا<br>مع د. وليد حجازي</h1>
-      <p class="pay-banner-sub">7 محاضرات بس وتدخل الامتحان مطمن</p>
-      <div class="pay-banner-badge">استفيد بخصم الـ 100 جنيه</div>
+      <img src="Course picture.png" alt="كورس الاستاتيكا" class="pay-banner-img" />
+      <div class="pay-banner-body">
+        <div class="pay-banner-badge">استفيد بخصم الـ 100 جنيه</div>
+        <p class="pay-banner-sub">7 محاضرات بس وتدخل الامتحان مطمن</p>
+      </div>
     </div>
 
     <!-- Pricing -->
